@@ -20,7 +20,7 @@
                 <tr>
                   <td>{{ synonym.synonym_reference }}</td>
                   <td class="col-md-10">
-                    <tags-input replace-spaces-with-dashes="false" on-tag-removed="synonymRemoved($tag)"
+                    <tags-input replace-spaces-with-dashes="false" min-length="1" on-tag-removed="synonymRemoved($tag)"
                       on-tag-added="synonymAdded($tag, synonym.synonym_id)" add-on-comma="true"
                       id="synonym_values_{{ synonym.synonym_id }}" ng-model="tags[synonym.synonym_id]"
                       placeholder="Enter synonyms comma seperated ..."></tags-input>
