@@ -223,7 +223,7 @@ function EditIntentController($rootScope, $scope, Bot, BotEntities, Intent, Expr
   })();
 
   $scope.addParameter = function (expression_id) {
-    if($scope._show_highlight){
+    if(!$scope._show_highlight){
       alert("Please switch to editing mode first!");
       return false;
     }
