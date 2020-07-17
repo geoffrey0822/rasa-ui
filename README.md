@@ -29,7 +29,7 @@ Rasa UI can run on your Rasa instance, or on a separate machine. Technically Ras
 
 ### Installing
 
-1. Clone/download the Rasa UI repository or a [release](https://www.github.com/paschmann/rasa-ui)
+1. Clone/download the Rasa UI repository or a [release](https://www.github.com/geoffrey0822/rasa-ui)
 2. Install npm packages.
 3. Set Rasa Server variable in package.json
 
@@ -85,6 +85,8 @@ Rasa UI is possible thanks to all the awesome contributers, thank you!
 * **btran10**
 * **btotharye**
 * **beevelop**
+
+Special thanks to paschmann for creating the great tools for rasa training and testing!
 
 ## License
 
