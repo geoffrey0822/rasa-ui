@@ -65,6 +65,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       for (var i = 0; i < stories.length; i++) {
         if (stories[i].story) {
           $scope.bot_data.stories += stories[i].story;
+          $scope.bot_data.stories += "\n\n";
         }
       }
       Actions.query({ bot_id: $scope.selectedBot.bot_id }, function(data) {
@@ -155,10 +156,23 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
     );
   };
 
+  function compare(a, b) {
+    const start_idx_a = a.parameter_start;
+    const start_idx_b = b.parameter_start;
+
+    let comparison = 0;
+    if(start_idx_a>start_idx_b){
+      comparison = -1;
+    }else if(start_idx_a<start_idx_b){
+      comparison = 1;
+    }
+    return comparison;
+  }
+
   //MD Version
   function generateNLUData(regex, intents, expressions, params, synonyms, variants) {
     let tmpData = "";
-    
+
     //Loop through Intents --> Examples (expressions) --> Entities --> Parameters
     for (let intent_i = 0; intent_i < intents.length; intent_i++) {
       let expressionList = expressions.filter(
@@ -172,9 +186,18 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
           let parameterList = params.filter(
             param => param.expression_id === expressionList[expression_i].expression_id
           );
+          parameterList.sort(compare);
           if (parameterList.length > 0) {
+            var tobe_params = [];
             for (let parameter_i = 0; parameter_i < parameterList.length; parameter_i++) {
-              expression = expression.splice(parameterList[parameter_i].parameter_end, 0, "](" + parameterList[parameter_i].entity_name + ")").splice(parameterList[parameter_i].parameter_start, 0, "[");
+              //console.log(parameterList[parameter_i])
+              part_a = expression.splice(parameterList[parameter_i].parameter_end, 0, "](" + parameterList[parameter_i].entity_name + ")");
+              part_b = part_a.splice(parameterList[parameter_i].parameter_start, 0, "[");
+              expression = part_b;
+              //console.log(parameterList[parameter_i].parameter_value)
+              //console.log(part_a);
+              //console.log(part_b);
+              //expression = expression.splice(parameterList[parameter_i].parameter_end, 0, "](" + parameterList[parameter_i].entity_name + ")").splice(parameterList[parameter_i].parameter_start, 0, "[");
             }
           }
           tmpData += "- " + expression + "\n";
@@ -234,7 +257,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       tmpData += "- " + intents[intent_i].intent_name + "\n"; 
     }
 
-    tmpData += "\ntemplates:\n"
+    tmpData += "\nresponses:\n"
     for (let action_i = 0; action_i < actions.length; action_i++) {
       var responses_array = [];
       for (let response_i = 0; response_i < responses.length; response_i++) {

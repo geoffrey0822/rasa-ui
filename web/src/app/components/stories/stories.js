@@ -43,7 +43,7 @@ function StoriesController($rootScope, $scope, $sce, Bot, Stories, Intents ) {
     var newStory = {};
     newStory.bot_id = $scope.bot.bot_id
     newStory.story_name = "story_" + Math.floor(Date.now() / 1000);
-    newStory.story = "## " + newStory.story_name + "\n";
+    newStory.story = "\r\n## " + newStory.story_name + "\n";
     
     Stories.save(newStory).$promise.then(function() {
       $scope.loadBotStories(Number($scope.bot.bot_id));
