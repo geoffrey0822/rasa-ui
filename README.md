@@ -34,7 +34,7 @@ Rasa UI can run on your Rasa instance, or on a separate machine. Technically Ras
 3. Set Rasa Server variable in package.json
 
 ```
-git clone https://github.com/paschmann/rasa-ui.git
+git clone https://github.com/geoffrey0822/rasa-ui.git
 cd rasa-ui
 npm install
 ```
