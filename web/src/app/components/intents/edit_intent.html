@@ -68,6 +68,8 @@
             <div class="row">
               <div class="col-sm-12">
                 <label>Highlight the word you want to reference as a entity value ...</label>
+                <br/>
+                <span>Entity Editing Mode:</span><input type="checkbox" ng-model="check" ng-change="toggleHighLight(check)">
                 <div class="list-group" dir-paginate="expression in expressionList  | itemsPerPage: 6">
                   <div class="list-group-item">
                     <span id="expression_{{expression.expression_id}}"
