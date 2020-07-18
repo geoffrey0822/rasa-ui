@@ -65,7 +65,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       for (var i = 0; i < stories.length; i++) {
         if (stories[i].story) {
           $scope.bot_data.stories += stories[i].story;
-          //$scope.bot_data.stories += "\n";
+          $scope.bot_data.stories += "\n";
         }
       }
       Actions.query({ bot_id: $scope.selectedBot.bot_id }, function(data) {
