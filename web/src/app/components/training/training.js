@@ -257,7 +257,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       tmpData += "- " + intents[intent_i].intent_name + "\n"; 
     }
 
-    tmpData += "\nresponses:\n"
+    tmpData += "\ntemplates:\n"
     for (let action_i = 0; action_i < actions.length; action_i++) {
       var responses_array = [];
       for (let response_i = 0; response_i < responses.length; response_i++) {
