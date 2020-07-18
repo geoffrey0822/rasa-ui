@@ -261,11 +261,13 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
     var not_action = [];
     for (let action_i = 0; action_i < actions.length; action_i++) {
       var responses_array = [];
+      if(!actions[action_i].action_name.startsWith("action_")){
+        not_action.push(actions[action_i].action_id);
+      }
       for (let response_i = 0; response_i < responses.length; response_i++) {
         //if action has responses list it
         if (responses[response_i].action_id == actions[action_i].action_id) {
           responses_array.push(responses[response_i]);
-          not_action.push(actions[action_i].action_id);
         }
       }
       if (responses_array.length > 0) {
