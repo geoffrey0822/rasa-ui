@@ -279,7 +279,7 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
 
     tmpData += "\nactions:\n"
     for (let action_i = 0; action_i < actions.length; action_i++) {
-      if(not_action.includes(actions[action_i].action_id)){
+      if(!not_action.includes(actions[action_i].action_id)){
         tmpData += "- " + actions[action_i].action_name + "\n";
       }
     }
