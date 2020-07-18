@@ -257,13 +257,15 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       tmpData += "- " + intents[intent_i].intent_name + "\n"; 
     }
 
-    tmpData += "\ntemplates:\n"
+    tmpData += "\nresponses:\n"
+    var not_action = [];
     for (let action_i = 0; action_i < actions.length; action_i++) {
       var responses_array = [];
       for (let response_i = 0; response_i < responses.length; response_i++) {
         //if action has responses list it
         if (responses[response_i].action_id == actions[action_i].action_id) {
           responses_array.push(responses[response_i]);
+          not_action.push(actions[action_i].action_id);
         }
       }
       if (responses_array.length > 0) {
@@ -274,10 +276,15 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       }
     }
 
+
     tmpData += "\nactions:\n"
     for (let action_i = 0; action_i < actions.length; action_i++) {
-      tmpData += "- " + actions[action_i].action_name + "\n"; 
+      if(not_action.includes(actions[action_i].action_id)){
+        tmpData += "- " + actions[action_i].action_name + "\n";
+      }
     }
+
+
 
     $scope.raw_data.domain = tmpData;
     $scope.updateData();
