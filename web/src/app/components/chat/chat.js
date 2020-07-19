@@ -93,6 +93,7 @@ function ChatController($scope, $rootScope, $interval, $http, Rasa_Version, Sett
         if (response.data && response.data.tracker) {
           $scope.selected_conversation.conversation = JSON.stringify(response.data);
           $scope.transactions = response.data.tracker.events;
+          console.log(response.data);
           checkForActions(response.data);
           $scope.loadConversationStory($scope.selected_conversation.conversation_id);
           scrollToMessage();
