@@ -252,6 +252,10 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       tmpData += "- " + entities[entity_i].entity_name + "\n"; 
     }
 
+    tmpData += "\nintents:\n"
+    for (let intent_i = 0; intent_i < intents.length; intent_i++) {
+      tmpData += "- " + intents[intent_i].intent_name + "\n";
+    }
 
     tmpData += "\nresponses:\n"
     var not_action = [];
@@ -284,10 +288,6 @@ function TrainingController($scope, $rootScope, $interval, $http, Rasa_Status, B
       }
     }
 
-    tmpData += "\nintents:\n"
-    for (let intent_i = 0; intent_i < intents.length; intent_i++) {
-      tmpData += "- " + intents[intent_i].intent_name + "\n";
-    }
 
 
     $scope.raw_data.domain = tmpData;
